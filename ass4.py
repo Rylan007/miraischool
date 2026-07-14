@@ -5,11 +5,11 @@ from io import BytesIO
 
 st.title("🖼️ AI Image Generator")
 
-# Task 1: Initialize memory
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Task 2: Display chat history
+
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         if message["role"] == "assistant" and message.get("image"):
@@ -17,7 +17,7 @@ for message in st.session_state.messages:
         else:
             st.markdown(message["content"])
 
-# Task 3: Chat input
+
 if user_prompt := st.chat_input("Describe an image..."):
 
     # Display and save user message
@@ -29,7 +29,7 @@ if user_prompt := st.chat_input("Describe an image..."):
         "content": user_prompt
     })
 
-    # Generate image using Pollinations
+    
     url = f"https://image.pollinations.ai/prompt/{user_prompt}"
     response = requests.get(url)
 
@@ -38,7 +38,7 @@ if user_prompt := st.chat_input("Describe an image..."):
             image = Image.open(BytesIO(response.content))
             st.image(image, caption=user_prompt)
 
-            # Task 4: Save assistant response
+        
             st.session_state.messages.append({
                 "role": "assistant",
                 "content": f"Generated image for: **{user_prompt}**",
