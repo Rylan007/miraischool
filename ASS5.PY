@@ -9,15 +9,11 @@ st.set_page_config(page_title="AI Image Studio", page_icon="🎨", layout="wide"
 st.title("🎨 AI Image Studio")
 st.write("Generate stunning AI images with customizable settings!")
 
-# -----------------------------
-# Session State
-# -----------------------------
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# -----------------------------
-# Sidebar Settings
-# -----------------------------
+
 st.sidebar.header("⚙️ Image Settings")
 
 art_style = st.sidebar.selectbox(
@@ -63,9 +59,7 @@ surprise_prompts = [
     "A floating castle above the clouds"
 ]
 
-# -----------------------------
-# Display Chat History
-# -----------------------------
+
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         if msg.get("image") is not None:
@@ -74,9 +68,6 @@ for msg in st.session_state.messages:
             st.markdown(msg["content"])
 
 
-# ======================================================
-# Image Generation Function
-# ======================================================
 def generate_image(prompt):
 
     full_prompt = f"{prompt}, {art_style}"
@@ -138,9 +129,7 @@ def generate_image(prompt):
             )
 
 
-# ======================================================
-# Surprise Me Button
-# ======================================================
+
 if st.button("🎲 Surprise Me!"):
 
     prompt = random.choice(surprise_prompts)
@@ -158,9 +147,7 @@ if st.button("🎲 Surprise Me!"):
     generate_image(prompt)
 
 
-# ======================================================
-# User Chat Input
-# ======================================================
+
 user_prompt = st.chat_input("Describe an image...")
 
 if user_prompt:
